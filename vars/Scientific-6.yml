@@ -1,0 +1,4 @@
+--- # RHEL / CentOS / Scientific Linux 6
+
+certbot_install_method: certbot-auto
+

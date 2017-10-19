@@ -1,7 +1,5 @@
 --- # Debian wheezy
 
-virtualenv_package_name: python-virtualenv
-
 letsencrypt_depends:
       - python
       - python-dev

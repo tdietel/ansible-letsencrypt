@@ -1,0 +1,16 @@
+
+- name: install certbot-auto
+  get_url:
+    url: https://dl.eff.org/certbot-auto
+    dest: "{{ certbot_auto_path }}"
+    owner: root
+    mode: 0755
+  register: get_certbot_auto_result
+    
+- name: install certbot-auto dependencies
+  command: "{{ certbot_auto_path }} --non-interactive --os-packages-only"
+  when: get_certbot_auto_result.changed == true
+  
+- name: set certbot path
+  set_fact: certbot_path={{ certbot_auto_path }}
+

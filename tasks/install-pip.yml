@@ -6,7 +6,7 @@
 - name: Install depends
   package: name={{ item }} state=present
   become: yes
-  with_items: "{{ letsencrypt_depends | default([]) }}"
+  with_items: "{{ certbot_pip_depends | default([]) }}"
   tags: install
 
 - name: Install virtualenv
@@ -17,7 +17,7 @@
 
 - name: Install python depends
   pip:
-    virtualenv: "{{ letsencrypt_venv }}"
+    virtualenv: "{{ certbot_pip_venv }}"
     virtualenv_site_packages: no
     name: "{{ item }}"
     state: latest
@@ -30,14 +30,14 @@
 
 - name: Install pycparser
   # https://community.letsencrypt.org/t/certbot-auto-fails-while-setting-up-virtual-environment-complains-about-package-hashes/20529/22
-  pip: virtualenv="{{ letsencrypt_venv }}" virtualenv_site_packages=no name=pycparser version=2.13 state=present virtualenv_python=python2
+  pip: virtualenv="{{ certbot_pip_venv }}" virtualenv_site_packages=no name=pycparser version=2.13 state=present virtualenv_python=python2
   become: yes
   tags: install
   when: ansible_os_family == "RedHat"
 
 - name: More python depends
   pip:
-    virtualenv: "{{ letsencrypt_venv }}"
+    virtualenv: "{{ certbot_pip_venv }}"
     virtualenv_site_packages: no
     name: letsencrypt
     state: latest

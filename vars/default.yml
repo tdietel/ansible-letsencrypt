@@ -1,7 +1,8 @@
 ---
 
-virtualenv_package_name: virtualenv
-letsencrypt_depends:
+certbot_pkg_name: certbot
+
+certbot_pip_depends:
       - python
       - python-dev
       - python-virtualenv
