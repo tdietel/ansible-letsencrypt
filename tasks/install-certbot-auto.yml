@@ -5,10 +5,12 @@
     dest: "{{ certbot_auto_path }}"
     owner: root
     mode: 0755
+  become: yes
   register: get_certbot_auto_result
-    
+      
 - name: install certbot-auto dependencies
   command: "{{ certbot_auto_path }} --non-interactive --os-packages-only"
+  become: yes
   when: get_certbot_auto_result.changed == true
   
 - name: set certbot path
